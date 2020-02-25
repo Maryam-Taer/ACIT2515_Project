@@ -1,0 +1,31 @@
+
+
+from book import Book
+
+
+class Textbook(Book):
+
+    COVER_TYPE = "textbook"
+
+    def __init__(self, book_id, book_title, author, published_year, edition, is_borrowed, book_subject):
+        super().__init__(book_id, book_title, author, published_year, edition, is_borrowed)
+        self._cover_type = self.COVER_TYPE
+        self._book_subject = book_subject
+
+
+
+    def display_info(self):
+        return self._book_id, self._book_title, self._author, self._published_year, self._edition, self._is_borrowed,\
+               self._cover_type, self._book_subject
+
+
+    def get_edition(self):
+        return self._book_id
+
+
+    def get_type(self):
+        return self._cover_type
+
+
+
+
