@@ -12,6 +12,8 @@ class TestLibraryManager(unittest.TestCase):
         self.book1 = eBook('B20V2', 'Me', 'Elton John', 2017, 4, 'OverDrive Read', 'biography', False)
         self.book2 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 9, 'hardcover case wrap',
                               'health', False)
+        self.book3 = Textbook('A110', 'why do we sleep?', 'John Simpliciano', 2015, 3, 'hardcover case wrap',
+                              'health', True)
 
     def test_constructor(self):
         """ valid constructor """
@@ -46,6 +48,9 @@ class TestLibraryManager(unittest.TestCase):
         self.library1.add_book(self.book1)
         self.assertIsNone(self.library1.get_book_by_id('B202'))
 
+        self.library1.add_book(self.book2)
+        self.assertEqual(self.library1.get_book_by_id('A111'), self.book2)
+
     def test_exist_in_library(self):
         """ Test if book exist in library by id """
         self.library1.add_book(self.book1)
@@ -61,7 +66,7 @@ class TestLibraryManager(unittest.TestCase):
     def test_get_book_stats(self):
         """ test if function returns inventory stats """
         self.library1.add_book(self.book1)
-        self.library1.add_book(self.book2)
+        self.library1.add_book(self.book3)
         self.assertIsInstance(self.library1.get_book_stat(), LibraryStats)
 
     def test_show_book_not_borrowed(self):
