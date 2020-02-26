@@ -24,12 +24,6 @@ class LibraryManager:
         """returns the name of the librarian"""
         return self._name
 
-    def get_book_record_values(self):
-        return self._book_record.values()
-
-    def get_book_record_id(self):
-        return self._book_record.keys()
-
     def add_book(self, book) -> None:
         """adds the books to book record"""
         if book not in self._book_record.values():

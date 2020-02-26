@@ -36,18 +36,18 @@ class LibraryStats:
         if attribute < min_value:
             raise ValueError(error_message)
 
-    def get_num_not_borrowed(self):
+    def get_num_not_borrowed(self) -> int:
         """ returns the number books that are available for the customer to borrow"""
         return self._num_not_borrowed
 
-    def get_num_borrowed(self):
+    def get_num_borrowed(self) -> int:
         """ returns the number books that are already borrowed"""
         return self._num_borrowed
 
-    def get_num_textbooks(self):
+    def get_num_textbooks(self) -> int:
         """ returns the number of textbooks"""
         return self._num_textbooks
 
-    def get_num_ebooks(self):
+    def get_num_ebooks(self) -> int:
         """ returns the number of ebooks"""
         return self._num_ebooks

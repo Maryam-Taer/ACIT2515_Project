@@ -50,7 +50,7 @@ class Textbook(Book):
         suffixes = {1: 'st', 2: 'nd', 3: 'rd'}
         return suffixes.get(val % 10, 'th')
 
-    def display_info(self):
+    def display_info(self) -> None:
         """displays the necessary book information using the attributes"""
         if self.get_availability_status():
             print(f'Book code {self.get_book_id} (BORROWED): {self.get_cover_type} {self.get_book_type} "{self.get_book_title}"'

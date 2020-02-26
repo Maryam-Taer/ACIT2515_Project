@@ -2,8 +2,8 @@
 # Set 2C
 # 2020-10-02
 
-"""the test class 'TestHouse' uses python unittest to test the methods and constructor
-in VanProperty to make sure that they are working right"""
+"""the test class 'TestTextbook' uses python unittest to test the methods and constructor
+in Textbook to make sure that they are working right"""
 
 from unittest import TestCase
 from textbook import Textbook
@@ -32,31 +32,31 @@ class TestTextbook(TestCase):
             textbook = Textbook('V654', 'Hamlet', 'Shakespeare', 2000, 10, 'hardcover dust jacket', 'kids', True)
 
     def test_get_book_type(self):
-        """tests the number of storeys of the house object"""
+        """tests the book type"""
         self.assertEqual(self.textbook.get_book_type, 'textbook')
         self.assertIsNotNone(self.textbook.get_book_type)
 
     def test_get_book_subject(self):
-        """tests the type of the house object (in this case -> 'house')"""
+        """tests the book subject"""
         self.assertEqual(self.textbook.get_book_subject, 'literature')
         self.assertIsNotNone(self.textbook.get_book_subject)
 
     def test_get_cover_type(self):
-        """tests the type of the house object (in this case -> 'house')"""
+        """tests the book cover type"""
         self.assertEqual(self.textbook.get_cover_type, 'hardcover dust jacket')
         self.assertIsNotNone(self.textbook.get_cover_type)
 
     def test_get_available_cover_types(self):
-        """tests the type of the house object (in this case -> 'house')"""
+        """tests the available cover types in the library"""
         self.assertEqual(self.textbook.get_available_cover_types, '\n '.join(self.textbook.COVER_TYPE))
         self.assertIsNotNone(self.textbook.get_available_cover_types)
 
     def test_suffix(self):
-        """tests the floor suffix of the condo object to make sure it returns the right suffix"""
+        """tests the book edition suffix for performance"""
         self.assertEqual(self.textbook.suffix(self.textbook.get_edition()), 'rd')
 
     def test_display_info(self):
-        """tests the description of the house object to make sure it returns none but prints the description"""
+        """tests the description of the textbook object to make sure it returns none but prints the description"""
         self.assertTrue(self.textbook.get_availability_status())
         self.assertEqual(self.textbook.display_info(), None)
 

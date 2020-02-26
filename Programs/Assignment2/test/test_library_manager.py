@@ -5,12 +5,13 @@ from library_stats import LibraryStats
 from textbook import Textbook
 from ebook import eBook
 
+
 class TestLibraryManager(unittest.TestCase):
     def setUp(self):
         self.library1 = LibraryManager('The_library')
         self.book1 = eBook('B20V2', 'Me', 'Elton John', 2017, 4, 'OverDrive Read', 'biography', False)
         self.book2 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 9, 'hardcover case wrap',
-                         'health', False)
+                              'health', False)
 
     def test_constructor(self):
         """ valid constructor """
@@ -45,13 +46,11 @@ class TestLibraryManager(unittest.TestCase):
         self.library1.add_book(self.book1)
         self.assertIsNone(self.library1.get_book_by_id('B202'))
 
-
     def test_exist_in_library(self):
         """ Test if book exist in library by id """
         self.library1.add_book(self.book1)
         self.assertIs(self.library1.exists_in_library('B20V2'), True)
         self.assertIs(self.library1.exists_in_library('B2V2'), False)
-
 
     def test_get_all_books(self):
         """ test if function returns all books in inventory """
@@ -75,7 +74,7 @@ class TestLibraryManager(unittest.TestCase):
         """ Test if function raises an error """
         with self.assertRaises(ValueError):
             self.library1.show_book_not_borrowed("asd")
-            
+
     def test_show_available_book_category(self):
         """ test if function display correct book categories"""
         self.library1.add_book(self.book1)
