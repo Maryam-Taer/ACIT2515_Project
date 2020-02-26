@@ -22,6 +22,7 @@ class eBook(Book):
         super().__init__(book_id, book_title, author, published_year, edition, is_borrowed)
         self._platform = platform
         self._book_genre = book_genre
+        self.validate(platform, book_genre)
 
     @property
     def get_book_type(self) -> str:
@@ -54,12 +55,12 @@ class eBook(Book):
         """validates the attributes of textbook object"""
         if type(platform) != str:
             raise TypeError(f'{platform} is invalid! Please enter the valid type of the eBook platform.')
-        elif platform.lower() not in cls.PLATFORM:
+        if platform not in cls.PLATFORM:
             raise ValueError(f'{platform} is not recognized as a standard platform. The existing types are: '
                              f'{cls.get_available_platforms}')
-        elif type(book_category) != str:
+        if type(book_category) != str:
             raise TypeError('Invalid subject! Please enter a valid book genre. (e.g. fiction)')
-        elif book_category.lower() not in cls.BOOK_GENRE:
+        if book_category.lower() not in cls.BOOK_GENRE:
             raise ValueError(f'no textbook under the subject {book_category} exists.')
 
     def display_info(self):

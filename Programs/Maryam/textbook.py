@@ -15,7 +15,7 @@ class Textbook(Book):
     COVER_TYPE = ['paperback', 'hardcover case wrap', 'hardcover dust jacket']
     BOOK_SUBJECT = ['language', 'biology', 'health', 'english', 'french', 'arts',
                     'music', 'science', 'psychology', 'math', 'poetry', 'history',
-                    'chemistry', 'physics', 'literature','short story']
+                    'chemistry', 'physics', 'literature', 'short story']
 
     """initiates all the special attributes of a book as well as inheriting the common attributes"""
 
@@ -66,7 +66,7 @@ class Textbook(Book):
         """validates the attributes of textbook object"""
         if type(cover_type) != str:
             raise TypeError(f'{cover_type} is invalid! Please enter the valid type of the textbook.')
-        if cover_type.lower() not in cls.COVER_TYPE:
+        if cover_type not in cls.COVER_TYPE:
             raise ValueError(f'{cover_type} is not recognized as a standard cover type. '
                              f'The existing types are: {cls.get_available_cover_types}')
         if type(book_subject) != str:

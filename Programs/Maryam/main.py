@@ -33,14 +33,14 @@ def print_report(library):
 
 if __name__ == '__main__':
     librarian = LibraryManager('Susan Sanderson')
-    book1 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 9, 'hardcover case wrap', 'health', False)
+    book1 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 3, 'hardcover case wrap', 'health', False)
     book2 = Textbook('B222', 'color methology', 'Maryam Taer', 2002, 4, 'paperback', 'arts', True)
     book3 = Textbook('V654', 'Hamlet', 'Shakespeare', 2000, 10, 'hardcover dust jacket', 'literature', True)
     book4 = Textbook('F009', 'Mein Kampf', 'Adolf Hitler', 1925, 6, 'paperback', 'history', False)
     book5 = eBook('B20V2', 'Me', 'Elton John', 2017, 4, 'OverDrive Read', 'biography', False)
     book6 = eBook('M3K12', 'Pax', 'Sara Pennypacker', 2012, 5, 'OverDrive Read', 'kids', True)
     book7 = eBook('L091A', 'Deadpool Vol.4: Monkey Business', 'Daniel Way', 2019, 5, 'Fast Read Ebooks', 'comics', True)
-    book8 = eBook('GH255', 'Golden in Death', 'J. D Robb', 2016, 5, 'OverDrive Read', 'fiction', True)
+    book8 = eBook('GH255', 'Golden in Death', 'J. D Robb', 2016, 5, 'OverDrive Read', 'fantasy', True)
 # ----------------------------------------------------------------------------------------------------------------------
 
     """Trying some 'success' cases per method"""

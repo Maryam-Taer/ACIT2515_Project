@@ -12,6 +12,8 @@ whether a book has been borrowed already or not"""
 class Book:
     """initiates all the common attributes of a book"""
     MIN_EDITION = 1
+    MIN_LENGTH = 3
+    MAX_LENGTH = 7
     MIN_PUBLISHED_YEAR = 1920
     MAX_PUBLISHED_YEAR = 2020
 
@@ -63,6 +65,8 @@ class Book:
     def validation(cls, book_id: str, book_title: str, author: str, published_year: int, edition: int) -> None:
         if type(book_id) != str:
             raise TypeError('Invalid book id! PLease enter the right id (e.g. s0124)')
+        if len(book_id) < cls.MIN_LENGTH or len(book_id) > cls.MAX_LENGTH:
+            raise ValueError('Book id needs to be between 3 to 7 characters.')
         if type(book_title) != str:
             raise TypeError(f'Book with the title {book_title} not found.')
         if type(author) != str:
@@ -70,8 +74,8 @@ class Book:
         if type(published_year) != int:
             raise TypeError('Invalid published year! PLease enter again')
         if published_year < cls.MIN_PUBLISHED_YEAR or published_year > cls.MAX_PUBLISHED_YEAR:
-            raise TypeError('Books published between 1995 and 2020 available in the library only.')
+            raise ValueError('Books published between 1995 and 2020 available in the library only.')
         if type(edition) != int:
             raise TypeError('invalid edition type! PLease enter again')
         if edition < cls.MIN_EDITION:
-            raise TypeError(f'The edition {edition} of this book does not exist in the library.')
+            raise ValueError(f'The edition {edition} of this book does not exist in the library.')
