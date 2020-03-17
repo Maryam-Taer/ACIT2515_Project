@@ -29,11 +29,14 @@ def add_book(book_type):
                           data["published_year"], data["edition"],
                           data["platform"], data["genre"], data["is_borrowed"])
             library.add_book(ebook)
+        else:
+            return make_response(f'Invalid book_type "{book_type}"!', 400)
 
-        return make_response(data["id"], 200)
-    except ValueError as error:
+    except KeyError as error:
         message = str(error)
         return make_response(message, 400)
+    else:
+        return make_response(data["id"], 200)
 
 
 @app.route("/library_manager/<book_type>/<book_id>", methods=["PUT"])
@@ -42,39 +45,35 @@ def update_book(book_id, book_type):
     book = library.get_book_by_id(book_id)
 
     if not book:
-        return make_response("Textbook not found.", 404)
+        return make_response(f"{book_type} not found.", 404)
 
     if book_type == "textbook":
         if "subject" not in data.keys():
-            return make_response("Invalid JSON: missing subject", 400)
+            return make_response("Invalid JSON: missing subject", 404)
         if "cover_type" not in data.keys():
-            return make_response("Invalid JSON: missing cover type", 400)
+            return make_response("Invalid JSON: missing cover type", 404)
+        library.update_book(book_id, data["subject"], data["cover_type"])
 
-    if book_type == "ebook":
+    elif book_type == "ebook":
         if "platform" not in data.keys():
-            return make_response("Invalid JSON: missing platform", 400)
+            return make_response("Invalid JSON: missing platform", 404)
         if "genre" not in data.keys():
-            return make_response("Invalid JSON: missing genre", 400)
+            return make_response("Invalid JSON: missing genre", 404)
+        library.update_book(book_id, data["platform"], data["genre"])
+    else:
+        return make_response(f'Invalid book_type "{book_type}"!', 400)
 
-    try:
-        if book_type == "textbook":
-            library.update_book(book_id, data["subject"], data["cover_type"])
-        elif book_type == "ebook":
-            library.update_book(book_id, data["platform"], data["genre"])
-
-        return make_response("", 200)
-    except ValueError as error:
-        return make_response(str(error), 400)
+    return make_response("", 200)
 
 
 @app.route("/library_manager/book/<book_id>", methods=["DELETE"])
 def delete_book(book_id):
-    try:
-        library.remove_book(book_id)
-    except ValueError as error:
-        return make_response(str(error), 400)
-    else:
-        return make_response("", 200)
+    book = library.get_book_by_id(book_id)
+    if not book:
+        return make_response("Book not found.", 404)
+
+    library.remove_book(book_id)
+    return make_response("", 200)
 
 
 @app.route("/library_manager/all", methods=["GET"])
@@ -88,11 +87,7 @@ def get_book_by_id(book_id):
 
     if not book:
         return make_response("Book not found.", 404)
-    try:
-        return make_response(jsonify(library.get_book_by_id(book_id).to_dict()), 200)
-
-    except AttributeError as error:
-        return make_response(str(error), 404)
+    return make_response(jsonify(library.get_book_by_id(book_id).to_dict()), 200)
 
 
 @app.route("/library_manager/all/<book_type>", methods=["GET"])
@@ -101,7 +96,7 @@ def get_book_by_type(book_type):
     if not book:
         return make_response("Book not found.", 404)
 
-    return make_response(jsonify(library.get_books_by_type(book_type).to_dict()), 200)
+    return make_response(jsonify(library.get_books_by_type(book_type)), 200)
 
 
 @app.route("/library_manager/all/stats", methods=["GET"])

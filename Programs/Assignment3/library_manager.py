@@ -21,7 +21,7 @@ class LibraryManager:
         self._name = name
         self._book_record = {}
         self._filepath = 'library_manager.json'
-        self.read_from_file(self._filepath)
+        self._read_from_file(self._filepath)
 
     @property
     def get_name(self) -> str:
@@ -36,13 +36,6 @@ class LibraryManager:
             raise LookupError('The book is already added to the library records.')
         self.write_to_file()
 
-    # def write_to_file(self, book_id: str):
-    #     """writes the instance to the library_manager.json file """
-    #     record_json = json.dumps(self._book_record[book_id].to_dict(), indent=4)
-    #     with open(self._filepath, 'w') as file:
-    #         file.write(record_json)
-    #     return file
-
     def write_to_file(self):
         """writes the instance to the library_manager.json file """
         book = self.to_dict()
@@ -54,25 +47,19 @@ class LibraryManager:
             file.write(record_json)
         return record_json
 
-    def read_from_file(self, path):
+    def _read_from_file(self, path):
         """reads the instance from the library_manager.json file
            creates entities accordingly"""
-        book = self.from_dict()
-        with open(path, 'r') as file:
-            entity = json.load(file)
+        try:
+            with open(path, 'r') as file:
+                entity = json.load(file)
+        except FileNotFoundError:
+            raise FileNotFoundError(f'{path} does not exist.')
 
         for ebook in entity["ebook"]:
-            book["ebook"].append(ebook)
+            self.from_dict(ebook, 'ebook')
         for textbook in entity["textbook"]:
-            book["textbook"].append(textbook)
-        return book
-
-    # @staticmethod
-    # def read_from_file(path):
-    #     """reads the instance from the library_manager.json file """
-    #     with open(path, 'r') as file:
-    #         json.load(file)
-    #     return file
+            self.from_dict(textbook, 'textbook')
 
     def remove_book(self, book_id: str) -> None:
         """removes the added books to the library records"""
@@ -110,13 +97,25 @@ class LibraryManager:
                 output["ebook"].append(book.to_dict())
         return output
 
-    def from_dict(self):
+    @staticmethod
+    def from_dict(book_dict: dict, book_type: str):
         """ Return textbook instance state from JSON format as dictionary """
-        output = dict()
-        output["name"] = self._name
-        output["ebook"] = list()
-        output["textbook"] = list()
-        return output
+        global instance
+        if book_type == "ebook":
+            instance = eBook(book_dict["id"], book_dict["title"], book_dict["author"],
+                             book_dict["published_year"], book_dict["edition"],
+                             book_dict["platform"], book_dict["genre"], book_dict["is_borrowed"])
+
+        elif book_type == "textbook":
+            instance = Textbook(book_dict["id"], book_dict["title"], book_dict["author"],
+                                book_dict["published_year"], book_dict["edition"],
+                                book_dict["cover_type"], book_dict["subject"], book_dict["is_borrowed"])
+        return instance
+        # output = dict()
+        # output["name"] = self._name
+        # output["ebook"] = list()
+        # output["textbook"] = list()
+        # return output
 
     def get_book_by_id(self, book_id: str) -> (object, None):
         """returns the book object if its id exists in the library records"""
@@ -125,10 +124,9 @@ class LibraryManager:
         else:
             return None
 
-    def get_books_by_type(self, book_type: str):  # FIX_ME
+    def get_books_by_type(self, book_type: str):
         """returns the all book object based on their type"""
-        book = [book for book in self._book_record.values() if book.get_book_type == book_type]
-        return book
+        return [book.to_dict() for book in self._book_record.values() if book.get_book_type == book_type]
 
     def exists_in_library(self, book_id: str) -> bool:
         """returns true if the book exists in the library records"""

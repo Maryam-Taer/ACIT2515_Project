@@ -1,3 +1,9 @@
+# Group 16
+# Maryam Taer & John Simpliciano
+# Set 2C
+# 2020-03-16
+
+
 from library_manager import LibraryManager
 from library_stats import LibraryStats
 from unittest import TestCase, mock
@@ -8,8 +14,11 @@ from ebook import eBook
 class TestLibraryManager(TestCase):
     def setUp(self):
         self.library1 = LibraryManager('The_library')
+
         self.mock_save_func = mock.Mock()
         self.library1.write_to_file = self.mock_save_func
+        self.mock_read_func = mock.Mock()
+        self.library1._read_from_file = self.mock_read_func
 
         self.book1 = eBook('B20V2', 'Me', 'Elton John', 2017, 4, 'OverDrive Read', 'biography', False)
         self.book2 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 9, 'hardcover case wrap',
@@ -17,12 +26,14 @@ class TestLibraryManager(TestCase):
         self.book3 = Textbook('A110', 'why do we sleep?', 'John Simpliciano', 2015, 3, 'hardcover case wrap',
                               'health', True)
 
-    def test_write_to_file(self):
-        self.assertTrue(self.mock_save_func.called)
-
     def test_constructor(self):
         """ valid constructor """
         self.assertIsInstance(self.library1, LibraryManager)
+        book4 = eBook('M3K12', 'Pax', 'Sara Pennypacker', 2012, 5, 'OverDrive Read', 'kids', True)
+
+        self.library1.add_book(book4)
+        # self.assertTrue(self.mock_save_func.called)
+        self.assertTrue(self.mock_read_func.called)
 
     def test_get_name(self):
         """ test if function returns correct name"""
@@ -31,6 +42,7 @@ class TestLibraryManager(TestCase):
     def test_add_book(self):
         """ test if function adds to the inventory """
         self.library1.add_book(self.book1)
+        self.assertTrue(self.mock_save_func.called)
 
     def test_add_book_fail(self):
         """ test if function raises error when book in library """
@@ -54,6 +66,9 @@ class TestLibraryManager(TestCase):
 
         self.library1.add_book(self.book3)
         self.library1.update_book('A110', 'language', 'paperback')
+
+        self.assertTrue(self.mock_save_func.called)
+        self.assertEqual(self.mock_save_func.call_count, 4)
 
     def test_update_book_fail(self):
         with self.assertRaises(ValueError):

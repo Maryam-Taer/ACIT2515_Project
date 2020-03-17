@@ -1,0 +1,47 @@
+{
+    "name": "Maryam",
+    "ebook": [
+        {
+            "id": "26D3",
+            "title": "Me",
+            "author": "Marina",
+            "published_year": 2010,
+            "edition": 4,
+            "platform": "Fast Read Ebooks",
+            "genre": "kids",
+            "is_borrowed": true
+        },
+        {
+            "id": "26D4",
+            "title": "Hello",
+            "author": "mahsa",
+            "published_year": 2018,
+            "edition": 5,
+            "platform": "Fast Read Ebooks",
+            "genre": "kids",
+            "is_borrowed": false
+        }
+    ],
+    "textbook": [
+        {
+            "id": "123A",
+            "title": "knwo",
+            "author": "maryam",
+            "published_year": 2001,
+            "edition": 12,
+            "cover_type": "paperback",
+            "subject": "language",
+            "is_borrowed": true
+        },
+        {
+            "id": "122SD",
+            "title": "I know",
+            "author": "mina",
+            "published_year": 2001,
+            "edition": 12,
+            "cover_type": "paperback",
+            "subject": "language",
+            "is_borrowed": true
+        }
+    ]
+}

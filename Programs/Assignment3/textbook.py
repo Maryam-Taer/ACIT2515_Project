@@ -35,7 +35,7 @@ class Textbook(Book):
         """returns the textbook subject in the library"""
         return self._book_subject
 
-    def set_book_subject(self, subject: str) -> None:  # FIX_ME
+    def set_book_subject(self, subject: str) -> None:
         """sets the textbook subjects in the library"""
         if type(subject) is not str:
             raise TypeError("Invalid cover type")
@@ -48,7 +48,7 @@ class Textbook(Book):
         """returns the textbook cover_type in the library"""
         return self._cover_type
 
-    def set_cover_type(self, cover_type) -> None:  # FIX_ME
+    def set_cover_type(self, cover_type) -> None:
         """sets the textbook cover type in the library"""
         if type(cover_type) is not str:
             raise TypeError("Invalid cover type")
@@ -67,7 +67,7 @@ class Textbook(Book):
         suffixes = {1: 'st', 2: 'nd', 3: 'rd'}
         return suffixes.get(val % 10, 'th')
 
-    def to_dict(self) -> dict: # FIX_ME
+    def to_dict(self) -> dict:
         """returns textbook instance state as a dictionary"""
         instance = dict(id=self._book_id, title=self._book_title, author=self._author,
                         published_year=self._published_year, edition=self._edition,
