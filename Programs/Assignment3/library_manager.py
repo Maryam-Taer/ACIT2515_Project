@@ -112,11 +112,6 @@ class LibraryManager:
                                 book_dict["published_year"], book_dict["edition"],
                                 book_dict["cover_type"], book_dict["subject"], book_dict["is_borrowed"])
         return instance
-        # output = dict()
-        # output["name"] = self._name
-        # output["ebook"] = list()
-        # output["textbook"] = list()
-        # return output
 
     def get_book_by_id(self, book_id: str) -> (object, None):
         """returns the book object if its id exists in the library records"""

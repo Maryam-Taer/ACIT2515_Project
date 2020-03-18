@@ -1,7 +1,7 @@
 # Group 16
 # Maryam Taer & John Simpliciano
 # Set 2C
-# 2020-02-20
+# 2020-03-16
 
 """creating instances and validation of the methods happens here"""
 

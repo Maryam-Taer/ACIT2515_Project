@@ -18,8 +18,6 @@ class TestLibraryManager(TestCase):
 
         self.mock_save_func = mock.Mock()
         self.library1.write_to_file = self.mock_save_func
-        self.mock_read_func = mock.Mock()
-        self.library1._read_from_file = self.mock_read_func
 
         self.book1 = eBook('B20V2', 'Me', 'Elton John', 2017, 4, 'OverDrive Read', 'biography', False)
         self.book2 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 9, 'hardcover case wrap',
