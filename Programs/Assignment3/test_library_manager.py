@@ -17,7 +17,7 @@ class TestLibraryManager(TestCase):
         self.library1 = LibraryManager('The_library')
 
         self.mock_save_func = mock.Mock()
-        self.library1.write_to_file = self.mock_save_func
+        self.library1._write_to_file = self.mock_save_func
 
         self.book1 = eBook('B20V2', 'Me', 'Elton John', 2017, 4, 'OverDrive Read', 'biography', False)
         self.book2 = Textbook('A111', 'why do we need to sleep?', 'John Simpliciano', 2017, 9, 'hardcover case wrap',
@@ -33,6 +33,7 @@ class TestLibraryManager(TestCase):
         """ tests to see if read_from_file method is called properly """
         self.librarian = LibraryManager('Maryam')
         self.assertTrue(os.path.exists('library_manager.json'))
+        self.librarian1 = LibraryManager('John')
         os.remove('library_manager.json')
         self.assertFalse(os.path.exists('library_manager.json'))
 

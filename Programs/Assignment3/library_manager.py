@@ -21,7 +21,7 @@ class LibraryManager:
         self._name = name
         self._book_record = {}
         self._filepath = 'library_manager.json'
-        self.write_to_file()
+        self._write_to_file()
         self._read_from_file(self._filepath)
 
     @property
@@ -35,9 +35,9 @@ class LibraryManager:
             self._book_record[book.get_book_id] = book
         else:
             raise LookupError('The book is already added to the library records.')
-        self.write_to_file()
+        self._write_to_file()
 
-    def write_to_file(self) -> dict:
+    def _write_to_file(self) -> dict:
         """writes the instance to the library_manager.json file """
         book = self.to_dict()
         book['ebook'] = list({b['id']: b for b in book['ebook']}.values())
@@ -83,7 +83,7 @@ class LibraryManager:
             book.set_book_platform(arg1)
             book.set_book_genre(arg2)
 
-        self.write_to_file()
+        self._write_to_file()
 
     def to_dict(self) -> dict:
         """ Return textbook instance state as a JSON dictionary """
