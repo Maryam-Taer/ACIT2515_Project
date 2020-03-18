@@ -37,7 +37,7 @@ class LibraryManager:
             raise LookupError('The book is already added to the library records.')
         self.write_to_file()
 
-    def write_to_file(self):
+    def write_to_file(self) -> dict:
         """writes the instance to the library_manager.json file """
         book = self.to_dict()
         book['ebook'] = list({b['id']: b for b in book['ebook']}.values())
@@ -85,7 +85,7 @@ class LibraryManager:
 
         self.write_to_file()
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """ Return textbook instance state as a JSON dictionary """
         output = dict()
         output["name"] = self._name
@@ -120,7 +120,7 @@ class LibraryManager:
         else:
             return None
 
-    def get_books_by_type(self, book_type: str):
+    def get_books_by_type(self, book_type: str) -> list:
         """returns the all book object based on their type"""
         return [book.to_dict() for book in self._book_record.values() if book.get_book_type == book_type]
 
@@ -131,7 +131,7 @@ class LibraryManager:
         else:
             return False
 
-    def get_all_books(self):
+    def get_all_books(self) -> (dict, list):
         """returns all the books in the library records"""
         if self._book_record:
             return self._book_record
@@ -173,7 +173,7 @@ class LibraryManager:
     def show_available_book_category(self, book_type: str) -> None:
         """displays all book (textbook/ebook) categories existing/
         available in the library in a table format"""
-        max_length = self.max_book_len()
+        max_length = self._max_book_len()
         self.draw_label(book_type)
         if book_type == Textbook.BOOK_TYPE:
             Textbook.BOOK_SUBJECT.sort()
@@ -185,7 +185,7 @@ class LibraryManager:
                 print('{:<8}'.format('|'), gen.ljust(max_length[1]), '{:>10}'.format('|'))
 
     @staticmethod
-    def max_book_len() -> List:
+    def _max_book_len() -> List:
         """returns the the max size element in ebook genre list and textbook subject list"""
         textbook_sub = max(len(sub) for sub in Textbook.BOOK_SUBJECT)
         ebook_gen = max(len(gen) for gen in eBook.BOOK_GENRE)
@@ -193,7 +193,7 @@ class LibraryManager:
 
     def draw_label(self, book_type: str) -> None:
         """draws the tables' top label"""
-        max_length = self.max_book_len()
+        max_length = self._max_book_len()
         if book_type == Textbook.BOOK_TYPE:
             print('+', end='')
             for i in range(max_length[0] * 3):

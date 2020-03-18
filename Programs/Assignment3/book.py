@@ -53,7 +53,7 @@ class Book:
         """returns the availability status of the book (borrowed: True/False)"""
         return self._is_borrowed
 
-    def to_dict(self) -> dict:  # FIX_ME
+    def to_dict(self) -> dict:
         """returns book instance state as a dictionary"""
         raise NotImplementedError()
 
