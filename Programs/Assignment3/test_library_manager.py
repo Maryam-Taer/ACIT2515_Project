@@ -30,6 +30,7 @@ class TestLibraryManager(TestCase):
         self.assertIsInstance(self.library1, LibraryManager)
 
     def test_read_from_file(self):
+        """ tests to see if read_from_file method is called properly """
         self.librarian = LibraryManager('Maryam')
         self.assertTrue(os.path.exists('library_manager.json'))
         os.remove('library_manager.json')
@@ -65,6 +66,7 @@ class TestLibraryManager(TestCase):
             self.library1.remove_book('B20V2')
 
     def test_update_book(self):
+        """ test the success samples of update book performance """
         self.library1.add_book(self.book1)
         self.library1.update_book('B20V2', 'Fast Read Ebooks', 'fantasy')
 
@@ -75,12 +77,14 @@ class TestLibraryManager(TestCase):
         self.assertEqual(self.mock_save_func.call_count, 4)
 
     def test_update_book_fail(self):
+        """ test the failure sample of update book performance """
         with self.assertRaises(ValueError):
             self.library1.update_book('A110', 'paperback', 'language')
             self.assertTrue(self.mock_save_func.called)
             self.assertEqual(self.mock_save_func.call_count, 1)
 
     def test_to_dict(self):
+        """ tests the performance of converting objects to json dictionary """
         self.library1.add_book(self.book1)
         self.library1.add_book(self.book2)
         self.library1.add_book(self.book3)

@@ -77,6 +77,7 @@ class TesteBook(TestCase):
         self.assertEqual(self.ebook.suffix(self.ebook.get_edition()), 'th')
 
     def test_to_dict(self):
+        """ tests the performance of converting ebook objects to json dictionary """
         self.assertTrue(self.ebook.to_dict())
         self.assertEqual(self.ebook.to_dict(), {'id': 'B20V2', 'title': 'Me',
                                                 'author': 'Elton John', 'published_year': 2017,

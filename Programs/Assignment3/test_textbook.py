@@ -78,6 +78,7 @@ class TestTextbook(TestCase):
         self.assertEqual(self.textbook.suffix(self.textbook.get_edition()), 'rd')
 
     def test_to_dict(self):
+        """ tests the performance of converting textbook objects to json dictionary """
         self.assertTrue(self.textbook.to_dict())
         self.assertEqual(self.textbook.to_dict(), {'id': 'V654', 'title': 'Hamlet',
                                                    'author': 'Shakespeare', 'published_year': 2000,
