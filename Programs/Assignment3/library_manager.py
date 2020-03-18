@@ -21,6 +21,7 @@ class LibraryManager:
         self._name = name
         self._book_record = {}
         self._filepath = 'library_manager.json'
+        self.write_to_file()
         self._read_from_file(self._filepath)
 
     @property

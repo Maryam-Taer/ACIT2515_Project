@@ -3,7 +3,7 @@
   "cover_type": "hardcover dust jacket", 
   "edition": 12, 
   "id": "123A", 
-  "is_borrowed": false, 
+  "is_borrowed": true,
   "published_year": 2001, 
   "subject": "biology", 
   "title": "knwo"

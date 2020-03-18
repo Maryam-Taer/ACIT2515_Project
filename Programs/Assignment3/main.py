@@ -93,5 +93,5 @@ if __name__ == '__main__':
     # print(librarian.get_books_by_type("textbook"))
     # print(book1.to_dict())
     # librarian._read_from_file('library_Manager.json')
-    # print(librarian.write_to_file())
+    print(librarian.write_to_file())
 

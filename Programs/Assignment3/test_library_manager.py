@@ -9,6 +9,7 @@ from library_stats import LibraryStats
 from unittest import TestCase, mock
 from textbook import Textbook
 from ebook import eBook
+import os
 
 
 class TestLibraryManager(TestCase):
@@ -29,11 +30,12 @@ class TestLibraryManager(TestCase):
     def test_constructor(self):
         """ valid constructor """
         self.assertIsInstance(self.library1, LibraryManager)
-        book4 = eBook('M3K12', 'Pax', 'Sara Pennypacker', 2012, 5, 'OverDrive Read', 'kids', True)
 
-        self.library1.add_book(book4)
-        # self.assertTrue(self.mock_save_func.called)
-        self.assertTrue(self.mock_read_func.called)
+    def test_read_from_file(self):
+        self.librarian = LibraryManager('Maryam')
+        self.assertTrue(os.path.exists('library_manager.json'))
+        os.remove('library_manager.json')
+        self.assertFalse(os.path.exists('library_manager.json'))
 
     def test_get_name(self):
         """ test if function returns correct name"""
@@ -49,11 +51,15 @@ class TestLibraryManager(TestCase):
         with self.assertRaises(LookupError):
             self.library1.add_book(self.book1)
             self.library1.add_book(self.book1)
+        self.assertTrue(self.mock_save_func.called)
+        self.assertEqual(self.mock_save_func.call_count, 1)
 
     def test_remove_book(self):
         """ test if function removes from inventory """
         self.library1.add_book(self.book1)
         self.library1.remove_book('B20V2')
+        self.assertTrue(self.mock_save_func.called)
+        self.assertEqual(self.mock_save_func.call_count, 1)
 
     def test_remove_book_fail(self):
         """ test if function raises error when book with no id exists """
@@ -73,6 +79,8 @@ class TestLibraryManager(TestCase):
     def test_update_book_fail(self):
         with self.assertRaises(ValueError):
             self.library1.update_book('A110', 'paperback', 'language')
+            self.assertTrue(self.mock_save_func.called)
+            self.assertEqual(self.mock_save_func.call_count, 1)
 
     def test_to_dict(self):
         self.library1.add_book(self.book1)
