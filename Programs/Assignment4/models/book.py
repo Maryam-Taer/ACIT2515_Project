@@ -32,34 +32,17 @@ class Book(Model):
         database = db
 
     def borrow(self, book_id):
-        raise NotImplementedError()
+        """ Abstract method to borrow book """
+        raise NotImplementedError('To be used in special entities')
 
     def return_book(self, book_id):
-        raise NotImplementedError()
+        """ Abstract method to return book to library """
+        raise NotImplementedError('To be used in special entities')
 
     def to_dict(self) -> dict:
-        """returns book instance state as a dictionary"""
-        raise NotImplementedError()
+        """ Return book instance state as a dictionary """
+        raise NotImplementedError('To be used in special entities')
 
     def get_book_type(self) -> None:
-        """abstract method of the book type -> to be used in child classes"""
-        raise NotImplementedError()
-
-    @classmethod
-    def validation(cls, book_id: str, book_title: str, author: str, published_year: int, edition: int) -> None:
-        if type(book_id) != str:
-            raise TypeError('Invalid book id! PLease enter the right id (e.g. s0124)')
-        if len(book_id) < cls.MIN_LENGTH or len(book_id) > cls.MAX_LENGTH:
-            raise ValueError('Book id needs to be between 3 to 7 characters.')
-        if type(book_title) != str:
-            raise TypeError(f'Book with the title {book_title} not found.')
-        if type(author) != str:
-            raise TypeError(f'No book written by {author} found.')
-        if type(published_year) != int:
-            raise TypeError('Invalid published year! PLease enter again')
-        if published_year < cls.MIN_PUBLISHED_YEAR or published_year > cls.MAX_PUBLISHED_YEAR:
-            raise ValueError('Books published between 1995 and 2020 available in the library only.')
-        if type(edition) != int:
-            raise TypeError('invalid edition type! PLease enter again')
-        if edition < cls.MIN_EDITION:
-            raise ValueError(f'The edition {edition} of this book does not exist in the library.')
+        """ Abstract method of the book type -> to be used in child classes """
+        raise NotImplementedError('To be used in special entities')

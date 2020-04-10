@@ -62,17 +62,17 @@ class LibraryStats:
         return self._num_textbooks
 
     def get_num_books(self) -> int:
-        """ Return the number of textbooks"""
+        """ Return the number of all books"""
         return self._num_books
 
     def get_borrowed_ebook(self) -> int:
-        """ Return the number books that are available for the customer to borrow"""
+        """ Return the number of borrowed ebooks"""
         return self._borrowed_ebooks
 
     def get_borrowed_textbook(self) -> int:
-        """ Return the number books that are already borrowed"""
+        """ Return the number of borrowed textbooks"""
         return self._borrowed_textbooks
 
     def get_borrowed_books(self) -> int:
-        """ Return the number of textbooks"""
+        """ Return the number of all borrowed books"""
         return self._borrowed_books

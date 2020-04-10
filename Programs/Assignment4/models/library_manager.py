@@ -24,10 +24,11 @@ class LibraryManager(Model):
         database = db
 
     def clear_record(self) -> None:
+        """ Clear 'book_id_record' dictionary """
         self.book_id_record.clear()
 
     def add_book(self, book) -> None:
-        """adds the books to db"""
+        """ Add the books to db """
         if book.book_id in self.book_id_record:
             raise ValueError('Invalid ID! Please enter a unique ID.')
         else:
@@ -35,7 +36,7 @@ class LibraryManager(Model):
             book.save()
 
     def remove_book(self, book_id: str) -> None:
-        """removes the added books from db"""
+        """ Remove the added books from db """
         if book_id not in self.book_id_record:
             raise KeyError(f'Book with ID {book_id} does not exist.')
         else:
@@ -53,19 +54,19 @@ class LibraryManager(Model):
         if not book:
             return None
 
-        if book.BOOK_TYPE == "textbook":
+        if book.get_book_type() == "textbook":
             if arg1 not in book.BOOK_SUBJECT or arg2 not in book.COVER_TYPE:
                 raise ValueError('Invalid entry!')
             else:
                 Textbook.update(book_subject=arg1, cover_type=arg2).where(Textbook.book_id == book_id).execute()
-        elif book.BOOK_TYPE == "ebook":
+        elif book.get_book_type() == "ebook":
             if arg1 not in book.PLATFORM or arg2 not in book.BOOK_GENRE:
                 raise ValueError('Invalid entry!')
             else:
                 eBook.update(platform=arg1, book_genre=arg2).where(eBook.book_id == book_id).execute()
 
     def get_book_by_id(self, book_id: str) -> (object, None):
-        """returns the book object if its id exists in the 'Book' db"""
+        """ Return the book object if its id exists in the 'Book' db """
         if book_id not in self.book_id_record:
             return None
         else:
@@ -76,7 +77,7 @@ class LibraryManager(Model):
 
     @staticmethod
     def get_books_by_type(book_type: str) -> (list, None):
-        """returns the all book object based on their type"""
+        """ Return the all book object based on their type """
         if book_type == eBook.BOOK_TYPE:
             return [book.to_dict() for book in eBook.select()]
         elif book_type == Textbook.BOOK_TYPE:
@@ -94,7 +95,7 @@ class LibraryManager(Model):
 
     @staticmethod
     def get_book_stat():
-        """Calculate the statistics of eBook and Textbook instances"""
+        """ Calculate the statistics of eBook and Textbook instances """
         num_ebooks = 0
         num_textbooks = 0
         num_books = 0

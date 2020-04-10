@@ -18,6 +18,8 @@ test_db.connect()
 class TestLibraryManager(TestCase):
     def setUp(self):
         """ Create tables in db & Create test data """
+        # I have tried importing the 'create_tables' & 'drop_tables'
+        # They didn't work, but i kept the py files :)
         test_db.create_tables([eBook, Textbook])
         self.library1 = LibraryManager(name='The_library')
         self.book1 = eBook(book_id='B20V2', book_title='Me', author='Elton John', published_year=2017,
@@ -73,7 +75,7 @@ class TestLibraryManager(TestCase):
         self.setUp()
         self.library1.add_book(self.book1)
         self.library1.add_book(self.book3)
-        self.library1.update_book('B20V2', 'Fast Read Ebooks', 'mystery')
+        self.library1.update_book('B20V2', 'Fast Read ebooks', 'mystery')
         self.library1.update_book('A110', 'chemistry', 'paperback')
 
     def test_update_book_fail(self):

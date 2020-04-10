@@ -21,22 +21,26 @@ class Textbook(Book):
 
     """initiates all the special attributes of a book as well as inheriting the common attributes"""
     cover_type = CharField()
-    book_subject = CharField()
+    book_subject = CharField(column_name='subject')
 
-    def borrow(self, book_id):
-        """Set 'is_borrowed' attribute to true"""
+    def borrow(self, book_id: str):
+        """ Set 'is_borrowed' attribute to true """
         textbook = Textbook.select().where(Textbook.book_id == book_id).get()
         if not textbook.is_borrowed:
             Textbook.update(is_borrowed=True).where(Textbook.book_id == book_id).execute()
 
-    def return_book(self, book_id):
-        """Set 'is_borrowed' attribute to false"""
+    def return_book(self, book_id: str):
+        """ Set 'is_borrowed' attribute to false """
         textbook = Textbook.select().where(Textbook.book_id == book_id).get()
         if textbook.is_borrowed:
             Textbook.update(is_borrowed=False).where(Textbook.book_id == book_id).execute()
 
+    def get_book_type(self) -> str:
+        """ Return book type """
+        return self.BOOK_TYPE
+
     def to_dict(self) -> dict:
-        """Return textbook instance state as a dictionary"""
+        """ Return textbook instance state as a dictionary """
         instance = dict(type=self.BOOK_TYPE, book_id=self.book_id, title=self.book_title, author=self.author,
                         published_year=self.published_year, edition=self.edition,
                         cover_type=self.cover_type, subject=self.book_subject,
@@ -44,6 +48,6 @@ class Textbook(Book):
         return instance
 
     def __str__(self):
-        """Special method to print Textbook """
+        """ Special method to print Textbook """
         return f"<{self.book_id}, {self.book_title}, {self.author}, {self.published_year}," \
                f"{self.edition}, {self.cover_type}, {self.book_subject}, {self.is_borrowed}>"

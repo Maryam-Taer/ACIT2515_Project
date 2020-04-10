@@ -5,16 +5,16 @@
 
 import re
 import requests
-from tkinter import ttk, messagebox as mb
-from tkinter.ttk import Style
+from tkinter import messagebox as mb
+from tkinter.ttk import Style, Frame, Label, Button, Entry, Combobox
 
 
-class AddTextbookPopup(ttk.Frame):
+class AddTextbookPopup(Frame):
     """ Popup Frame to Add a Student """
 
     def __init__(self, parent, close_callback):
         """ Constructor """
-        ttk.Frame.__init__(self, parent)
+        Frame.__init__(self, parent)
 
         style = Style()
         style.configure('S.TButton', foreground='dark green', font=("TkTextFont", 11))
@@ -24,40 +24,41 @@ class AddTextbookPopup(ttk.Frame):
         self._close_cb = close_callback
         self.grid(padx=40, pady=40, rowspan=2, columnspan=2)
 
-        ttk.Label(self, text="Book ID:", style='C.TLabel').grid(row=1, column=1)
-        self._book_id = ttk.Entry(self)
+        Label(self, text="Book ID:", style='C.TLabel').grid(row=1, column=1)
+        self._book_id = Entry(self)
         self._book_id.grid(row=1, column=2, padx=40, pady=10)
 
-        ttk.Label(self, text="Title:", style='C.TLabel').grid(row=2, column=1)
-        self._title = ttk.Entry(self)
+        Label(self, text="Title:", style='C.TLabel').grid(row=2, column=1)
+        self._title = Entry(self)
         self._title.grid(row=2, column=2, padx=40, pady=10)
 
-        ttk.Label(self, text="Author:", style='C.TLabel').grid(row=3, column=1)
-        self._author = ttk.Entry(self)
+        Label(self, text="Author:", style='C.TLabel').grid(row=3, column=1)
+        self._author = Entry(self)
         self._author.grid(row=3, column=2, padx=40, pady=10)
 
-        ttk.Label(self, text="Year Published:", style='C.TLabel').grid(row=4, column=1)
-        self._published_year = ttk.Entry(self)
+        Label(self, text="Year Published:", style='C.TLabel').grid(row=4, column=1)
+        self._published_year = Entry(self)
         self._published_year.grid(row=4, column=2, padx=40, pady=10)
 
-        ttk.Label(self, text="Edition:", style='C.TLabel').grid(row=5, column=1)
-        self._edition = ttk.Entry(self)
+        Label(self, text="Edition:", style='C.TLabel').grid(row=5, column=1)
+        self._edition = Entry(self)
         self._edition.grid(row=5, column=2, padx=40, pady=10)
 
-        ttk.Label(self, text="Cover Type:", style='C.TLabel').grid(row=6, column=1)
-        self._cover_type = ttk.Combobox(self, values=['paperback', 'hardcover case wrap', 'hardcover dust jacket'])
+        Label(self, text="Cover Type:", style='C.TLabel').grid(row=6, column=1)
+        self._cover_type = Combobox(self, values=['paperback', 'hardcover case wrap', 'hardcover dust jacket'])
         self._cover_type.current(0)
         self._cover_type.grid(row=6, column=2, padx=40, pady=10)
 
-        ttk.Label(self, text="Book Subject:", style='C.TLabel').grid(row=7, column=1)
-        self._subject = ttk.Combobox(self, values=['language', 'biology', 'health', 'english', 'french', 'arts',
-                                                   'music', 'science', 'psychology', 'math', 'poetry', 'history',
-                                                   'chemistry', 'physics', 'literature', 'short story'])
+        Label(self, text="Book Subject:", style='C.TLabel').grid(row=7, column=1)
+        self._subject = Combobox(self, values=['language', 'biology', 'health', 'english', 'french', 'arts',
+                                               'music', 'science', 'psychology', 'math', 'poetry', 'history',
+                                               'chemistry', 'physics', 'literature', 'short story'])
         self._subject.current(0)
         self._subject.grid(row=7, column=2, padx=40, pady=10)
 
-        ttk.Button(self, text="Add", width=15, style="S.TButton", command=self._validate_entry).grid(row=8, column=1, padx=40, pady=10)
-        ttk.Button(self, text="Cancel", width=15, style="C.TButton", command=self._close_cb).grid(row=8, column=2, padx=40)
+        Button(self, text="Add", width=15, style="S.TButton", command=self._validate_entry).grid(row=8, column=1,
+                                                                                                 padx=40, pady=10)
+        Button(self, text="Cancel", width=15, style="C.TButton", command=self._close_cb).grid(row=8, column=2, padx=40)
 
     def _submit_cb(self):
         """ Submit the Add Student """
@@ -85,6 +86,8 @@ class AddTextbookPopup(ttk.Frame):
         edition = self._edition.get()
 
         # if not (book_id or title or author or published_year or edition) DOESN'T work for me :)
+        # Also I tried regex and for some reason that didn't work either
+
         if (not book_id) or (not title) or (not author) or (not published_year) or (not edition):
             mb.showerror(title='Error while Submitting', message='Please fill all fields.')
 
@@ -99,7 +102,3 @@ class AddTextbookPopup(ttk.Frame):
 
         else:
             self._submit_cb()
-
-
-
-
