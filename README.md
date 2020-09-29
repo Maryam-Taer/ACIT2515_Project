@@ -1,4 +1,4 @@
-# ACIT2515 Assignment - Group 16 - John Simpliciano & Maryam Taer
+# ACIT2515 Assignment - Group 16 - Author: Maryam Taer
 
 This Project is developed and designed to function as a Library Management System (LMS). 
 We have focused on two main types of book (i.e. textbooks and e-books) for the purpose of the project. Our LMS is a GUI based system. On the platform, users are able to
