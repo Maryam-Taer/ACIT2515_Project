@@ -33,5 +33,5 @@ The system is able to manage the following tasks:
     ** Note: User can also see which specific book is borrowed by looking at its info on our GUI LMS.
 
     6. Library Manager can delete any books 
-    7. Users are able to borrow/return the books that are available (if a user attempt to borrow a book that has already been borrowed, s/he recieves an error message 
-    and the same logic applies for attempting to return a book that is not borrowed).
+    7. Users are able to borrow/return the books that are available (if a user attempt to borrow a book that has already been borrowed,
+    s/he recieves an error message and the same logic applies for attempting to return a book that is not borrowed).
