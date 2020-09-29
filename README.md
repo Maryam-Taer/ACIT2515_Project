@@ -1,4 +1,4 @@
-# ACIT2515 Assignment - Group 16 - Author: Maryam Taer
+# BCIT ACIT2515 - Library Management System - Group Project
 
 This Project is developed and designed to function as a Library Management System (LMS). 
 We have focused on two main types of book (i.e. textbooks and e-books) for the purpose of the project. Our LMS is a GUI based system. On the platform, users are able to
@@ -35,3 +35,6 @@ The system is able to manage the following tasks:
     6. Library Manager can delete any books 
     7. Users are able to borrow/return the books that are available (if a user attempt to borrow a book that has already been borrowed,
     s/he recieves an error message and the same logic applies for attempting to return a book that is not borrowed).
+    
+    
+Author: Maryam Taer
